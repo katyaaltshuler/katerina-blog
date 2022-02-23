@@ -10,12 +10,19 @@ from flask_login import UserMixin, login_user, LoginManager, login_required, cur
 from forms import *
 from functools import wraps
 from flask_gravatar import Gravatar
+import os
+from dotenv import load_dotenv  # pip install python-dotenv
+
+load_dotenv("C:/Users/User/Desktop/EnvVar/.env")
+
+API_KEY = os.getenv("MyAPIKey")
+debug = bool(os.getenv("DEBUG"))
 
 year = date.today().year
 
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
+app.config['SECRET_KEY'] = API_KEY
 ckeditor = CKEditor(app)
 Bootstrap(app)
 
@@ -239,4 +246,4 @@ def delete_comment(post_id):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=debug)
